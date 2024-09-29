@@ -158,9 +158,7 @@ const SearchBar = () => {
       
 
       {
-        filterData.length > 0 ? (
-          
-
+        filterData.length > 0 && (
           <ul className='absolute bg-[#F5F5F3] top-[120%]  px-4  py-4 grid grid-cols-4 z-50 gap-8'>
             {
               filterData.map((item,index)=>(
@@ -168,13 +166,8 @@ const SearchBar = () => {
                   <Card key={index}  src={item.thumbnail} ProductName={item.title} ProductPrice={item.price} Band={item.brand} />
                 </li>
               ))
-
             }
           </ul>
-          
-        ):(
-          <ul className='absolute bg-[#F5F5F3] top-[120%] w-full px-10  py-4 grid grid-cols-4 z-50 gap-10'><p>No Product Found</p></ul>
-          
         )
       }
     </Container>

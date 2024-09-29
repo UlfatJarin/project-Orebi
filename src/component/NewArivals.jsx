@@ -1,13 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Tittle from './layer/Tittle'
 import Container from './layer/Container'
-import product1 from '/public/asset/product/product01.jpg'
-import product2 from '/public/asset/product/product02.jpg'
-import product3 from '/public/asset/product/product03.jpg'
-import product4 from '/public/asset/product/product04.jpg'
 import Slider from 'react-slick'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import Card from './layer/Card'
+import axios from 'axios'
 
 
 function SampleNextArrow(props) {
@@ -33,6 +30,18 @@ function SamplePrevArrow(props) {
 }
 
 const NewArivals = () => {
+
+  let[allproduct , setAllproduct] = useState([])
+
+  useEffect(() => {
+    const getData = async () => {
+      let responsce  = await axios.get('https://dummyjson.com/products')
+      setAllproduct(responsce.data.products);
+    }
+    getData()
+
+  },[])
+
 
   var settings = {
     dots: false,
@@ -73,14 +82,13 @@ const NewArivals = () => {
       </Container>
       <Container className='max-w-[1640px]' >
         <Slider {...settings}>
-          <Card className='py-2' imgsrc={product1} offer='10%' />
-          <Card className='py-2' imgsrc={product2} offer='New' />
-          <Card className='py-0' imgsrc={product3} />
-          <Card className='py-2' imgsrc={product4} offer='New' />
-          <Card className='py-2' imgsrc={product1} offer='10%' />
-          <Card className='py-2' imgsrc={product2} offer='New' />
-          <Card className='py-0' imgsrc={product3} />
-          <Card className='py-2' imgsrc={product4} offer='New' />
+          {
+            allproduct.map((item,index)=>(
+              <Card key={index} src={item.thumbnail} ProductName={item.title} ProductPrice={item.price} Band={item.brand} className='py-2' offer='10%' />
+
+            ))
+          }
+          
         </Slider>
       </Container>
     </div>

@@ -2,20 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
 import Card from './Card';
-import product1 from '/public/asset/product/product01.jpg'
-import product2 from '/public/asset/product/product02.jpg'
-import product3 from '/public/asset/product/product03.jpg'
-import product4 from '/public/asset/product/product04.jpg'
-import product5 from '/public/asset/product/product05.jpg'
-import product6 from '/public/asset/product/product06.jpg'
-import product7 from '/public/asset/product/product07.jpg'
-import product8 from '/public/asset/product/product08.jpg'
-import product9 from '/public/asset/product/product09.jpg'
-import product10 from '/public/asset/product/product10.jpg'
-import product11 from '/public/asset/product/product11.jpg'
-import product12 from '/public/asset/product/product12.jpg'
-import product13 from '/public/asset/product/product13.jpg'
-import product14 from '/public/asset/product/product14.jpg'
 
 
 // Example items, to simulate fetching from another resources.

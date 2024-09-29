@@ -1,22 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from './layer/Container'
 import Tittle from './layer/Tittle'
 import Card from './layer/Card'
-import sop1 from '/public/asset/product/specialofferproduct1.jpg'
-import sop2 from '/public/asset/product/specialofferproduct2.jpg'
-import sop3 from '/public/asset/product/specialofferproduct3.jpg'
-import sop4 from '/public/asset/product/specialofferproduct4.jpg'
+import axios from 'axios'
 
 const SpecialOffer = () => {
+
+  let [SpecialOffer ,setSpecialOffer] =useState([])
+
+  useEffect(()=>{
+    let getData= async ()=>{
+      try{
+        let responsce =await axios.get('https://dummyjson.com/products')
+        setSpecialOffer(responsce.data.products);
+
+      }catch(error){
+        console.error("Something is worng" , error)
+      }
+    }
+    getData()
+  })
+
   return (
     <div>
         <Container className='md:my-32 my-5'>
             <Tittle title='Special Offers'/>
             <div className='flex justify-around lg:justify-between flex-wrap'>
-                <Card className='py-2' imgsrc={sop1} offer='New'/>
-                <Card className='py-2' imgsrc={sop2} offer='New'/>
-                <Card className='py-2' imgsrc={sop3} offer='New'/>
-                <Card className='py-2' imgsrc={sop4} offer='New'/>
+              {
+                SpecialOffer?
+                SpecialOffer.filter((_,Soffer)=> Soffer>=8 && Soffer<12 ).map((item,index)=>(
+                 
+                  <Card key={index} src={item.thumbnail} ProductName={item.title} ProductPrice={item.price} Band={item.brand} className='py-2' offer='New' />
+
+                )):<p></p>
+              }
             </div>
         </Container>
     </div>
