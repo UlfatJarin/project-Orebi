@@ -111,9 +111,9 @@ const SearchBar = () => {
 
           </ul>
         </div>
-        <div className="mid flex relative  w-[601px] ml-[-25%]">
-          <input onChange={manageSearch} value={Search} className='md:py-4 py-1 md:px-5 px-2 w-full z-0 ' type="text" placeholder='Search by products name' />
-          <IoSearch className='absolute top-1/2 md:right-5 right-2  -translate-y-1/2 ' />
+        <div className="mid flex relative  w-[601px] md:ml-[-25%] ml-0">
+          <input onChange={manageSearch} value={Search} className='md:py-4 py-1 md:px-5  px-2 md:w-full w-[98%] z-0 ' type="text" placeholder='Search by products name' />
+          <IoSearch className='absolute top-1/2 md:right-5 right-4  -translate-y-1/2 ' />
         </div>
         <div className="right  gap-x-10 items-center hidden md:flex">
           <div className="rightleft flex gap-x-2 relative">
@@ -159,11 +159,11 @@ const SearchBar = () => {
 
       {
         filterData.length > 0 && (
-          <ul className='absolute bg-[#F5F5F3] top-[120%]  px-4  py-4 grid grid-cols-4 z-50 gap-8'>
+          <ul className='absolute bg-white border-2 border-gray-400 top-[120%]  px-4  py-4 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 z-50 gap-8'>
             {
               filterData.map((item,index)=>(
-                <li className='bg-white'>
-                  <Card key={index}  src={item.thumbnail} ProductName={item.title} ProductPrice={item.price} Band={item.brand} />
+                <li >
+                  <Card key={index} src={item.thumbnail} ProductName={item.title} ProductPrice={item.price} Band={item.brand} />
                 </li>
               ))
             }
