@@ -5,8 +5,11 @@ import Tittle from '../component/layer/Tittle'
 import Input from '../component/layer/Input'
 import CheckBox from '../component/layer/CheckBox'
 import Button from '../component/layer/Button'
+import { getDatabase, push, ref, set } from "firebase/database";
 
 const SignIn = () => {
+    const db = getDatabase();
+
     let Division = ["Barishal", "Chattogram", "Dhaka", "Khulna", "Rajshahi", "Rangpur", "Mymensingh", "Sylhet"];
 
     const District = ["Bandarban", "Barguna", "Barisal", "B Brahmanbaria", "Brahmanbaria", "Chandpur", "Chandpur", "Chattogram", "Chuadanga", "Cox's Bazar", "Dhaka", "Dinajpur", "Faridpur", "Feni", "Gaibandha", "Gazipur", "Gopalganj", "Habiganj", "Halda", "Jamalpur", "Jashore", "Jatiyo", "Jhalokati", "Jhenaidah", "Joypurhat", "Khagrachari", "Khulna", "Kishoreganj", "Kurigram", "Kushtia", "Lalmonirhat", "Madaripur", "Magura", "Manikganj", "Meherpur", "Moulvibazar", "Mymensingh", "Naogaon", "Narail", "Narayanganj", "Narsingdi", "Narsingdi", "Natore", "Netrokona", "Nilphamari", "Noakhali", "Pabna", "Panchagarh", "Patuakhali", "Patuakhali", "Pirojpur", "Rajbari", "Rajshahi", "Rangamati", "Rangpur", "Satkhira", "Shariatpur", "Sherpur", "Sirajganj", "Sunamganj", "Sylhet", "Tangail", "Thakurgaon"];
@@ -25,20 +28,40 @@ const SignIn = () => {
         district:"",
         Password:"",
         Repeatpassword:"",
-        agree: false
+        agree: true,
 
     });
     
     console.log(SignInInfo);
 
     const OnChangeSignUp  =(event)=>{
-        const {id, value , checked} = event.target;
+        const {id, value } = event.target;
         setSignInInfo({
             ...SignInInfo,
-            [id]: id === "agree" ? checked : value,
+            [id]: value,
         })
         
     }
+    
+    const handleSignIn =()=>{
+        
+        for (let key in SignInInfo){
+            
+            if(SignInInfo[key] == ""){
+                alert("This Field is required "+ key)
+                (x +'faka');
+                break
+                
+            }
+        }
+        
+    }
+    // database a data entry
+    set(push(ref(db, 'User/')) ,SignInInfo).then(()=>{
+        console.log("data store done ");
+        
+    });
+    
     
 
 
@@ -115,7 +138,7 @@ const SignIn = () => {
 
                         <div className='flex flex-col gap-6'>
                             <div className='flex gap-4 items-center'>
-                                <CheckBox type='checkbox' id='agree' value10={SignInInfo.agree} onChange={OnChangeSignUp} />
+                                <CheckBox type='checkbox' id='agree'/>
                                 <p className='font-DM text-sm text-textcolor2'>I have read and agree to the Privacy Policy</p>
                             </div>
                             <div  className='flex gap-4 items-center'>
@@ -125,7 +148,7 @@ const SignIn = () => {
                                 <CheckBox type='radio' name='subscribe' />
                                 <p className='font-DM text-sm text-textcolor2'>No</p>
                             </div>
-                            <Button  className='max-w-[200px]' btntext='Sign up'/>
+                            <Button  className='max-w-[200px]' btntext='Sign up' onClick={handleSignIn}/>
 
                         </div>
                     </div>
